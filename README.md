@@ -1,6 +1,6 @@
 # Adaptive Load Balancer
 
-A Computer Networks mini project that distributes HTTP-over-TCP connections across three backend servers using Ryu, Mininet, and OpenFlow 1.3. Clients connect to a single virtual IP at `10.0.0.100:80`.
+A project that distributes HTTP-over-TCP connections across three backend servers using Ryu, Mininet, and OpenFlow 1.3. Clients connect to a single virtual IP at `10.0.0.100:80`.
 
 ```text
 h1, h2, h3 (clients) -- s1 (Open vSwitch) -- h4, h5, h6 (TCP servers)
@@ -15,17 +15,6 @@ h1, h2, h3 (clients) -- s1 (Open vSwitch) -- h4, h5, h6 (TCP servers)
 - The controller prefers healthy backends below the overload thresholds. A backend is marked overloaded at 10 tracked flows or 8 Mbps and recovers once both measurements fall below their lower thresholds.
 - TCP health probes and switch link events detect failures. The controller removes rules for a failed backend and excludes it from new assignments. A successful TCP probe can return it to rotation.
 - The demo launches 30 concurrent requests from three clients in each phase. It tests normal operation, an application failure on `h5`, and recovery after restarting `h5`.
-
-## Repository layout
-
-| File | Purpose |
-| --- | --- |
-| [`lb_controller.py`](lb_controller.py) | OpenFlow controller, backend selection, monitoring, and failure handling |
-| [`topo.py`](topo.py) | Mininet topology and concurrent request demo |
-| [`server.py`](server.py) | Threaded HTTP server that identifies the backend in its response |
-| [`Dockerfile`](Dockerfile) | Python 3.9 and Ryu 4.34 controller environment |
-| [`examples/requests-sample.log`](examples/requests-sample.log) | Request decisions from the supplied lab log |
-| [`archive/original-submission.zip`](archive/original-submission.zip) | Unmodified submission with all 11 original files, including the saved controller and Python bytecode |
 
 ## Run the lab
 
