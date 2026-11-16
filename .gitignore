@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.py.save
+.venv/
+venv/
+*.log
+!examples/requests-sample.log
